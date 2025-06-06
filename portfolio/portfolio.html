@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Portfolio - Alexan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: white;
+    }
+
+    .navbar {
+      background-color: black;
+      width: 75%;
+      margin: 30px auto;
+      padding: 15px;
+      border-radius: 50px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1em;
+      padding: 10px 20px;
+      border-radius: 25px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .navbar a:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .intro-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    margin: 50px auto;
+    gap: 40px;
+    flex-wrap: wrap;
+    }
+
+    .intro-section .text {
+    flex: 1;
+    min-width: 250px;
+    }
+
+    .intro-section .text h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #000;
+    }
+
+    .intro-section .text p {
+    font-size: 1.1em;
+    color: #333;
+    text-align: justify;
+    }
+
+    .intro-section .photo {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 25px;
+    }
+    .contact-section {
+    background-color: black;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: 80px;
+    }
+
+    .contact-section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    }
+
+    .contact-info p {
+    font-size: 1.1em;
+    margin: 10px 0;
+    }
+
+    .contact-info a {
+    color: #ffffff;
+    text-decoration: underline;
+    }
+
+    .contact-info a:hover {
+    color: #bbbbbb;
+    }
+
+  </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html">Entrée</a>
+        <a href="portfolio.html">Accueil</a>
+        <a href="projets.html">Mes projets</a>
+        <a href="apropos.html">À propos de moi</a>
+      </nav>
+  <div class="intro-section">
+    <div class="text">
+      <h2>Bienvenue sur mon portfolio</h2>
+      <p>Je suis Alexan, étudiant en BUT Science des Données à l'Université de Poitiers, sur le campus de Niort. Dans cette formation nous étudions principalement la programmation et les mathématiques afin d'analyser au mieux la donnée. Mon objectif : transformer les données brutes en informations utiles, compréhensibles et exploitables.</p>
+    </div>
+    <img src="img/moichemise.jpeg" alt="Photo de profil" class="photo">
+  </div>
+  <footer class="contact-section">
+    <h2>Me Contacter</h2>
+    <div class="contact-info">
+      <p>📞 06 70 76 35 45</p>
+      <p>✉️ alexan.ravonneaux@gmail.com</p>
+      <p>🔗 <a href="https://www.linkedin.com/in/alexan-ravonneaux-302b5a312/" target="_blank">Mon profil LinkedIn</a></p>
+      <p>📍 Basé à Niort, France</p>
+      <p>📄 <a href="docs/Alexan Ravonneaux.pdf" target="_blank" download>Télécharger mon CV</a></p>
+
+    </div>
+  </footer>
+  
+
+</body>
+</html>

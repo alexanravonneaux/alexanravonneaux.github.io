@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mes projets - Alexan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: white;
+    }
+
+    .navbar {
+      background-color: black;
+      width: 75%;
+      margin: 30px auto;
+      padding: 15px;
+      border-radius: 50px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+    
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1em;
+      padding: 10px 20px;
+      border-radius: 25px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .navbar a:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .project-section {
+      width: 75%;
+      margin: 50px auto;
+    }
+
+    .project {
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+      text-align: justify;
+    }
+
+    .project:hover {
+      transform: translateY(-5px);
+    }
+
+    .project h3 {
+      margin-top: 0;
+      font-size: 1.5em;
+      color: #000;
+    }
+
+    .project p {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html">Entrée</a>
+        <a href="portfolio.html">Accueil</a>
+        <a href="projets.html">Mes projets</a>
+        <a href="apropos.html">À propos de moi</a>
+      </nav>
+
+  <section class="project-section">
+    <div class="project">
+      <h3>Création d’un reporting</h3>
+      <p>Application fait sur Excel en VBA pour automatiser la gestion de nos notes avec le calcul du passage ou non en deuxième année. Ce projet a pu nous servir durant toute l'année.</p>
+    </div>
+
+    <div class="project">
+      <h3>Ecriture et lecture de fichiers de données</h3>
+      <p>Projet de création d'un programme Python pour transtyper des données d'un format JSON à un format CSV.</p>
+    </div>
+
+    <div class="project">
+        <h3>Apprendre en situation la production de données en entreprise</h3>
+        <p>Création de graphiques suite à un questionnaire pour en faire un compte-rendu professionnel.</p>
+      </div>
+    <div class="project">
+        <h3>Présentation en anglais d'un territoire économique et culturel</h3>
+        <p>Récupération de données sur un territoire précis, création d'un diaporama et présentation en anglais.</p>
+    </div>
+    
+    <div class="project">
+        <h3>Mise en œuvre d'une enquête</h3>
+        <p>Création de A à Z d'une enquête sur le logiciel Sphinx IQ3 et récupération des réponses.</p>
+    </div>
+
+    <div class="project">
+        <h3>Conception et implémentation d'une base de données</h3>
+        <p>Création d'une base de données avec MySQL et création d'une interface graphique en Python avec TKinter pour alimenter cette base de données.</p>
+    </div>
+
+    <div class="project">
+        <h3>Estimation par échantillonnage</h3>
+        <p>Échantillonnage simple et stratifié d'une population puis comparatif des deux avec des tests du khi² et V de cramer entre deux variables sur RStudio.</p>
+    </div>
+
+    <div class="project">
+        <h3>Régression sur des données réelles</h3>
+        <p>Modèle de régression réalisé en R pour estimer le prix des biens immobiliers dans les Deux-Sèvres. Résultats interprétés avec graphiques et intervalles de confiance.</p>
+    </div>
+
+    <div class="project">
+        <h3>Dataviz (concours)</h3>
+        <p>Concours d'une journée pour avoir le meilleur tableau de bord sur Power Bi avec les données de la population française.</p>
+    </div>
+
+    <div class="project">
+        <h3>Construction et présentation d’indicateurs de performance</h3>
+        <p>Mise en oeuvre de calcul pour identifier les indicateurs de performances de carrefour</p>
+    </div>
+
+    <div class="project">
+        <h3>Analyse de données, reporting et datavisualisation</h3>
+        <p>Projet final regroupant l’ensemble de nos compétences principales : programmation en Python, calcul d’indicateurs statistiques en R, et datavisualisation sur Power BI. Nous avons créé une application en Python capable de charger et nettoyer les données, puis d’afficher un graphique sur la représentativité des individus par rapport à la population française. Deux boutons permettent ensuite d’ouvrir respectivement une interface R Shiny pour l’analyse statistique, et une interface Power BI pour l’exploration visuelle des données.</p>
+    </div>
+  </section>
+
+</body>
+</html>
