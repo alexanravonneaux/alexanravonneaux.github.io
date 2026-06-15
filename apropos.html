@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>À propos — Alexan Ravonneaux</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="À propos d'Alexan Ravonneaux — parcours, expériences, valeurs et formation en BUT Science des Données à l'IUT de Niort.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+  <style>
+    body { padding-top: 52px; }
+
+    /* ══════════════════════════════
+       INTRO HERO (blanc)
+    ══════════════════════════════ */
+    .about-hero {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-mid);
+    }
+
+    .about-hero-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 90px 40px 80px;
+      display: flex;
+      gap: 72px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    /* Photo */
+    .about-photo-frame {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .about-photo {
+      width: 280px;
+      height: 340px;
+      object-fit: cover;
+      border-radius: var(--radius-xl);
+      display: block;
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Infos flottantes */
+    .info-float {
+      position: absolute;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      padding: 10px 14px;
+      font-size: 0.78em;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+      border: 1px solid var(--gray-mid);
+    }
+
+    .info-float.bottom-right {
+      bottom: -12px; right: -12px;
+    }
+
+    .info-float.top-right {
+      top: -12px; right: -12px;
+    }
+
+    /* Texte */
+    .about-intro-text { flex: 1; min-width: 260px; }
+
+    .about-intro-text h1 {
+      font-size: clamp(2em, 4vw, 3.2em);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+
+    .about-intro-text p {
+      font-size: 1.05em;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    /* Quick infos */
+    .quick-facts {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--gray-mid);
+    }
+
+    .qf-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88em;
+      color: var(--text-secondary);
+    }
+
+    .qf-item .qf-icon { font-size: 1.1em; }
+    .qf-item strong   { color: var(--text-primary); }
+
+    /* ══════════════════════════════
+       TIMELINE (gris)
+    ══════════════════════════════ */
+    .timeline-section {
+      background: var(--gray-light);
+      border-bottom: 1px solid var(--gray-mid);
+    }
+
+    .timeline-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 90px 40px;
+    }
+
+    .timeline-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .timeline-header h2 {
+      font-size: clamp(1.8em, 3.5vw, 2.8em);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+
+    .timeline-header p {
+      color: var(--text-secondary);
+      font-size: 1em;
+    }
+
+    /* Timeline items */
+    .tl-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .tl-item {
+      display: flex;
+      gap: 24px;
+      padding-bottom: 36px;
+    }
+
+    .tl-item:last-child { padding-bottom: 0; }
+
+    .tl-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      flex-shrink: 0;
+    }
+
+    .tl-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1.5px solid var(--gray-border);
+      box-shadow: var(--shadow-xs);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1em;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .tl-item:hover .tl-dot {
+      background: var(--text-primary);
+      border-color: var(--text-primary);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+
+    .tl-line {
+      flex: 1;
+      width: 1.5px;
+      background: var(--gray-border);
+      margin-top: 6px;
+    }
+
+    .tl-body {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    .tl-body h3 {
+      font-size: 1.05em;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .tl-body p {
+      font-size: 0.88em;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ══════════════════════════════
+       VALEURS (blanc)
+    ══════════════════════════════ */
+    .values-section {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-mid);
+    }
+
+    .values-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 90px 40px;
+    }
+
+    .values-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .values-header h2 {
+      font-size: clamp(1.8em, 3.5vw, 2.8em);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+
+    .values-header p {
+      color: var(--text-secondary);
+      font-size: 1em;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--gray-mid);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+
+    @media (max-width: 900px) {
+      .values-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .value-tile {
+      background: var(--white);
+      padding: 36px 28px;
+      transition: var(--transition);
+    }
+
+    .value-tile:hover {
+      background: var(--gray-light);
+    }
+
+    .value-tile .vt-icon {
+      font-size: 2em;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .value-tile h3 {
+      font-size: 1em;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .value-tile p {
+      font-size: 0.82em;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ══════════════════════════════
+       CTA (gris)
+    ══════════════════════════════ */
+    .about-cta {
+      background: var(--gray-light);
+    }
+
+    .about-cta-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 90px 40px;
+      text-align: center;
+    }
+
+    .about-cta-inner h2 {
+      font-size: clamp(1.8em, 3.5vw, 2.8em);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .about-cta-inner p {
+      color: var(--text-secondary);
+      font-size: 1em;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+      .about-hero-inner { flex-direction: column; gap: 40px; padding: 70px 24px 60px; }
+      .about-photo { width: 100%; max-width: 280px; height: 300px; }
+      .timeline-inner, .values-inner, .about-cta-inner { padding: 70px 24px; }
+      .values-grid { grid-template-columns: repeat(2, 1fr); }
+      .info-float.top-right { display: none; }
+    }
+
+    @media (max-width: 500px) {
+      .values-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="navbar-brand">Alexan Ravonneaux</a>
+    <div class="navbar-links">
+      <a href="portfolio.html">Accueil</a>
+      <a href="projets.html">Projets</a>
+      <a href="apropos.html" class="active">À propos</a>
+    </div>
+  </nav>
+
+  <!-- ── SECTION 1 : INTRO ── -->
+  <section class="about-hero">
+    <div class="about-hero-inner">
+
+      <!-- Photo -->
+      <div class="about-photo-frame reveal">
+        <img src="img/moi_iasi.jpeg" alt="Alexan Ravonneaux" class="about-photo">
+        <div class="info-float bottom-right">
+          <span>📍</span> Niort, France
+        </div>
+        <div class="info-float top-right">
+          <span>🎓</span> BUT SD — 2ème année
+        </div>
+      </div>
+
+      <!-- Texte -->
+      <div class="about-intro-text reveal reveal-delay-1">
+        <div class="label">À propos de moi</div>
+        <h1>Optimiste,<br>curieux,<br>challenger.</h1>
+        <p>
+          Je m'appelle Alexan Ravonneaux, j'ai 20 ans et je suis étudiant en 2ème année de BUT Science des Données à l'IUT de Niort, parcours VCOD. 
+          D'un naturel calme, ouvert d'esprit et résolument optimiste, j'aime être challengé et apprendre en continu.
+        </p>
+        <p>
+          Passionné par les données, j'apprécie autant travailler en équipe — pour démultiplier l'efficacité collective — qu'être autonome quand la situation l'exige. Mon stage à l'étranger en Roumanie m'a beaucoup appris sur ces deux plans.
+        </p>
+        <div class="quick-facts">
+          <div class="qf-item"><span class="qf-icon">🎓</span> <span>BUT Science des Données · <strong>IUT de Niort</strong> · Parcours VCOD</span></div>
+          <div class="qf-item"><span class="qf-icon">💪</span> <span>Passionné de <strong>musculation</strong> — discipline & dépassement de soi</span></div>
+          <div class="qf-item"><span class="qf-icon">🎵</span> <span>Grand amateur de <strong>musique</strong> — tous les styles, sans frontières</span></div>
+          <div class="qf-item"><span class="qf-icon">🌍</span> <span>Stage à l'étranger — <strong>UAIC Iași, Roumanie</strong></span></div>
+          <div class="qf-item"><span class="qf-icon">📧</span> <span><strong>alexan.ravonneaux@gmail.com</strong></span></div>
+          <div class="qf-item"><span class="qf-icon">📞</span> <span><strong>06 70 76 35 45</strong></span></div>
+          <div class="qf-item"><span class="qf-icon">💼</span> <span>Ouvert aux <strong>stages & alternances</strong></span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── SECTION 2 : TIMELINE ── -->
+  <section class="timeline-section">
+    <div class="timeline-inner">
+      <div class="timeline-header reveal">
+        <div class="label">Mon parcours</div>
+        <h2>Des expériences qui me définissent</h2>
+        <p>Un itinéraire atypique, mais formateur à chaque étape.</p>
+      </div>
+
+      <div class="tl-list">
+
+        <div class="tl-item reveal">
+          <div class="tl-left">
+            <div class="tl-dot">🌍</div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-body">
+            <h3>Un parcours nomade et résilient</h3>
+            <p>
+              Grandi entre la Vendée, le Maine-et-Loire et Toulouse avant de m'installer près de Niort en 2019, 
+              j'ai appris à m'intégrer dans de nouveaux environnements, à développer mon autonomie et à m'adapter 
+              à des situations changeantes. Cette mobilité est aujourd'hui un atout que je mobilise naturellement dans mon travail.
+            </p>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-left">
+            <div class="tl-dot">💪</div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-body">
+            <h3>Le sport comme discipline de vie</h3>
+            <p>
+              Pratiquant de badminton et de basketball dans ma jeunesse, je me consacre aujourd'hui à la musculation avec régularité. 
+              Le sport m'a inculqué des valeurs essentielles : discipline, persévérance et dépassement de soi.
+            </p>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-left">
+            <div class="tl-dot">🚒</div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-body">
+            <h3>Sapeur-pompier volontaire — Un engagement citoyen</h3>
+            <p>
+              À 18 ans, après une formation complète, j'ai rejoint le corps des sapeurs-pompiers volontaires pour un an. 
+              Cet engagement m'a apporté une rigueur opérationnelle, une capacité à gérer le stress et 
+              à travailler efficacement en équipe dans des contextes exigeants.
+            </p>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-left">
+            <div class="tl-dot">🛠️</div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-body">
+            <h3>Expériences professionnelles diversifiées</h3>
+            <p>
+              Mon parcours professionnel illustre mon sens de l'initiative : achat-revente de smartphones, 
+              entretien de jardins, gestion autonome d'un magasin de location de vélos sur l'île d'Oléron, 
+              puis prestations de cuisine à domicile lors d'événements privés. 
+              Chaque expérience a renforcé ma responsabilité et mon organisation.
+            </p>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-left">
+            <div class="tl-dot">🎵</div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-body">
+            <h3>La musique — une passion sans frontières</h3>
+            <p>
+              J'écoute de la musique de tous les styles, sans me limiter à un genre. Du rap au jazz, de l'électro au classique, 
+              en passant par le rock ou la soul : la musique est pour moi une source d'énergie et d'inspiration au quotidien. 
+              Cette ouverture musicale reflète d'ailleurs ma façon d'aborder les sujets : sans préjugés, curieux de tout.
+            </p>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-left">
+            <div class="tl-dot">🇷🇴</div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-body">
+            <h3>Stage à l'UAIC Iași — Roumanie (Erasmus+)</h3>
+            <p>
+              Stage de recherche en data science à l'Université Alexandru Ioan Cuza, Iași. Travail sur l'anonymisation 
+              de données médicales (k-anonymat, RGPD) et la régression logistique. Cette expérience à l'étranger 
+              m'a considérablement renforcé sur deux plans : mon <strong>autonomie</strong> au quotidien dans un pays 
+              étranger, et mon <strong>aisance à l'oral en anglais</strong> dans un contexte académique international.
+            </p>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-left">
+            <div class="tl-dot">📊</div>
+          </div>
+          <div class="tl-body">
+            <h3>Un choix assumé pour la Science des Données</h3>
+            <p>
+              Après une première année en BUT SD marquée par un manque de maturité, j'ai recommencé avec une vision et une 
+              motivation claires. Cette seconde chance a été déterminante : j'ai compris à quel point la donnée est 
+              omniprésente et stratégique. Aujourd'hui en 2ème année, parcours VCOD, je suis pleinement investi et convaincu 
+              que ce domaine correspond à mes aspirations professionnelles.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── SECTION 3 : VALEURS ── -->
+  <section class="values-section">
+    <div class="values-inner">
+      <div class="values-header reveal">
+        <div class="label">Ce qui me caractérise</div>
+        <h2>Mes valeurs & atouts</h2>
+        <p>Les qualités que j'apporte dans chaque projet et chaque collaboration.</p>
+      </div>
+      <div class="values-grid reveal reveal-delay-1">
+        <div class="value-tile">
+          <span class="vt-icon">☀️</span>
+          <h3>Optimisme</h3>
+          <p>Un état d'esprit naturellement positif qui m'aide à avancer même face aux obstacles et à maintenir une bonne dynamique dans les projets.</p>
+        </div>
+        <div class="value-tile">
+          <span class="vt-icon">🤝</span>
+          <h3>Esprit d'équipe</h3>
+          <p>J'aime travailler en équipe pour être encore plus efficace : la complémentarité des profils est une force que je sais valoriser.</p>
+        </div>
+        <div class="value-tile">
+          <span class="vt-icon">🎯</span>
+          <h3>Goût du challenge</h3>
+          <p>Être challengé me motive. Les projets complexes ou les nouvelles technologies sont une opportunité d'apprendre et de me dépasser.</p>
+        </div>
+        <div class="value-tile">
+          <span class="vt-icon">🔄</span>
+          <h3>Adaptabilité</h3>
+          <p>Capacité à m'intégrer dans des contextes nouveaux — que ce soit une nouvelle équipe, un pays étranger ou un nouvel outil technique.</p>
+        </div>
+        <div class="value-tile">
+          <span class="vt-icon">💪</span>
+          <h3>Discipline</h3>
+          <p>La musculation m'a appris la régularité et la persévérance. Ces qualités se traduisent directement dans mon travail et mes projets.</p>
+        </div>
+        <div class="value-tile">
+          <span class="vt-icon">🌍</span>
+          <h3>Ouverture d'esprit</h3>
+          <p>Curiosité naturelle pour les autres cultures, les idées nouvelles et les styles différents — que ce soit en musique, en tech ou dans la vie.</p>
+        </div>
+        <div class="value-tile">
+          <span class="vt-icon">🚀</span>
+          <h3>Autonomie</h3>
+          <p>Capable d'avancer seul quand il le faut. Mon stage en Roumanie a été une vraie école de l'autonomie — géographique, linguistique et professionnelle.</p>
+        </div>
+        <div class="value-tile">
+          <span class="vt-icon">🗣️</span>
+          <h3>Aisance à l'oral</h3>
+          <p>Mon expérience à l'étranger m'a permis de gagner en confiance et en fluidité à l'oral en anglais dans un contexte académique et professionnel.</p>
+        </div>
+        <div class="value-tile">
+          <span class="vt-icon">💡</span>
+          <h3>Sens analytique</h3>
+          <p>Aptitude à transformer des données complexes en insights clairs et actionnables — c'est ce qui me passionne dans la data science.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── SECTION 4 : CTA ── -->
+  <section class="about-cta">
+    <div class="about-cta-inner reveal">
+      <div class="label">Me contacter</div>
+      <h2>Envie d'échanger ?</h2>
+      <p>
+        Je suis disponible pour des opportunités de stage, d'alternance ou de collaboration sur des projets liés à la Data Science et à la Business Intelligence.
+      </p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="mailto:alexan.ravonneaux@gmail.com" class="btn-apple">Envoyer un e-mail</a>
+        <a href="https://www.linkedin.com/in/alexan-ravonneaux-302b5a312/" class="btn-apple-ghost" target="_blank">LinkedIn →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <h2>Alexan Ravonneaux</h2>
+    <p class="footer-sub">Étudiant en BUT Science des Données · IUT de Niort · Université de Poitiers</p>
+    <div class="contact-grid">
+      <a href="tel:0670763545" class="contact-item">📞 06 70 76 35 45</a>
+      <a href="mailto:alexan.ravonneaux@gmail.com" class="contact-item">✉️ alexan.ravonneaux@gmail.com</a>
+      <a href="https://www.linkedin.com/in/alexan-ravonneaux-302b5a312/" target="_blank" class="contact-item">🔗 LinkedIn</a>
+      <a href="docs/Alexan Ravonneaux.pdf" class="contact-item" download>📄 Mon CV</a>
+      <a class="contact-item">📍 Niort, France</a>
+    </div>
+    <nav class="footer-nav">
+      <a href="portfolio.html">Accueil</a>
+      <a href="projets.html">Mes projets</a>
+      <a href="apropos.html">À propos</a>
+    </nav>
+    <p class="footer-copy">© 2026 Alexan Ravonneaux</p>
+  </footer>
+
+  <script>
+    // ── Navbar ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // ── Reveal ──
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+
+</body>
+</html>

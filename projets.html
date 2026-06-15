@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mes projets — Alexan Ravonneaux</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Projets réalisés par Alexan Ravonneaux en BUT Science des Données — Python, R, SQL, Power BI, Talend, Docker, D3.js, PHP, Machine Learning.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+  <style>
+    body { padding-top: 52px; }
+
+    /* ══════════════════════════════════
+       PAGE HEADER
+    ══════════════════════════════════ */
+    .page-hero {
+      background: var(--white);
+      text-align: center;
+      padding: 80px 40px 60px;
+      border-bottom: 1px solid var(--gray-mid);
+    }
+    .page-hero .label { margin-bottom: 12px; }
+    .page-hero h1 {
+      font-size: clamp(2.2em, 5vw, 4em);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+    .page-hero p {
+      color: var(--text-secondary);
+      font-size: 1.05em;
+      max-width: 520px;
+      margin: 0 auto 32px;
+      line-height: 1.65;
+    }
+
+    /* ══════════════════════════════════
+       FILTER BAR
+    ══════════════════════════════════ */
+    .filter-bar {
+      background: var(--white);
+      padding: 0 40px 28px;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--gray-mid);
+      position: sticky;
+      top: 52px;
+      z-index: 100;
+    }
+    .filter-chip {
+      background: var(--gray-light);
+      border: 1px solid var(--gray-mid);
+      color: var(--text-secondary);
+      font-size: 0.82em;
+      font-weight: 600;
+      font-family: inherit;
+      padding: 7px 16px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 28px;
+    }
+    .filter-chip:hover { background: var(--gray-mid); color: var(--text-primary); }
+    .filter-chip.active {
+      background: var(--text-primary);
+      border-color: var(--text-primary);
+      color: var(--white);
+    }
+
+    /* ══════════════════════════════════
+       SECTION HEADER
+    ══════════════════════════════════ */
+    .year-header {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 60px 40px 28px;
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+    }
+    .year-header h2 {
+      font-size: 1.5em;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+    .year-header .year-count { font-size: 0.85em; color: var(--text-tertiary); font-weight: 500; }
+    .year-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--gray-mid);
+      display: block;
+    }
+
+    /* ══════════════════════════════════
+       PROJECTS GRID
+    ══════════════════════════════════ */
+    .projects-grid {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 40px 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 20px;
+    }
+
+    /* ══════════════════════════════════
+       PROJECT CARD
+    ══════════════════════════════════ */
+    .proj-card {
+      background: var(--gray-light);
+      border-radius: var(--radius-xl);
+      padding: 30px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      cursor: default;
+      transition: var(--transition);
+      border: 1px solid transparent;
+      text-decoration: none;
+    }
+    .proj-card:hover {
+      background: var(--white);
+      border-color: var(--gray-border);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+    }
+    .proj-card .proj-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .proj-icon { font-size: 2em; line-height: 1; }
+    .year-pill {
+      font-size: 0.68em;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .year-pill.y1 { background: #dbeafe; color: #1d4ed8; }
+    .year-pill.y2 { background: #ede9fe; color: #5b21b6; }
+    .year-pill.stage { background: #dcfce7; color: #15803d; }
+
+    .proj-card h3 {
+      font-size: 1em;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.35;
+    }
+    .proj-card p {
+      font-size: 0.84em;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .proj-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+
+    /* GitHub link at bottom of card */
+    .proj-gh {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.76em;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      margin-top: 2px;
+      transition: color 0.2s;
+    }
+    .proj-gh:hover { color: var(--text-primary); }
+    .proj-gh svg { flex-shrink: 0; }
+
+    .bottom-spacer { height: 60px; }
+
+    @media (max-width: 768px) {
+      .projects-grid { grid-template-columns: 1fr; padding: 0 24px 40px; }
+      .year-header    { padding: 48px 24px 20px; }
+      .filter-bar     { padding: 0 24px 24px; }
+      .page-hero      { padding: 60px 24px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="navbar-brand">Alexan Ravonneaux</a>
+    <div class="navbar-links">
+      <a href="portfolio.html">Accueil</a>
+      <a href="projets.html" class="active">Projets</a>
+      <a href="apropos.html">À propos</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-hero reveal">
+    <div class="label">BUT Science des Données · Parcours VCOD</div>
+    <h1>Mes projets</h1>
+    <p>De la collecte à la visualisation — 24 projets répartis sur 3 semestres et un stage à l'étranger.</p>
+  </header>
+
+  <!-- FILTRES -->
+  <div class="filter-bar">
+    <button class="filter-chip active" onclick="filter('all',this)" id="f-all">Tous</button>
+    <button class="filter-chip" onclick="filter('y1',this)" id="f-y1">1ère année</button>
+    <button class="filter-chip" onclick="filter('y2',this)" id="f-y2">2ème année</button>
+    <button class="filter-chip" onclick="filter('stage',this)" id="f-stage">Stage</button>
+    <button class="filter-chip" onclick="filter('python',this)" id="f-python">Python</button>
+    <button class="filter-chip" onclick="filter('r',this)" id="f-r">R</button>
+    <button class="filter-chip" onclick="filter('sql',this)" id="f-sql">SQL</button>
+    <button class="filter-chip" onclick="filter('powerbi',this)" id="f-powerbi">Power BI</button>
+    <button class="filter-chip" onclick="filter('excel',this)" id="f-excel">Excel / VBA</button>
+    <button class="filter-chip" onclick="filter('etl',this)" id="f-etl">ETL / Data Eng.</button>
+    <button class="filter-chip" onclick="filter('web',this)" id="f-web">Web</button>
+  </div>
+
+  <!-- ══════ 1ÈRE ANNÉE ══════ -->
+  <div class="year-header reveal" data-section="y1">
+    <h2>1ère année — Semestres 1 & 2</h2>
+    <span class="year-count">13 projets</span>
+  </div>
+
+  <div class="projects-grid" id="grid-y1">
+
+    <div class="proj-card reveal" data-tags="y1 excel">
+      <div class="proj-top"><span class="proj-icon">📊</span><span class="year-pill y1">S1</span></div>
+      <h3>Automatisation d'un reporting de suivi académique</h3>
+      <p>Application Excel en VBA calculant automatiquement les moyennes pondérées, les coefficients et le passage en 2ème année. Outil utilisé tout au long de l'année par la promotion.</p>
+      <div class="proj-chips">
+        <span class="chip orange">Excel</span>
+        <span class="chip orange">VBA</span>
+        <span class="chip">Automatisation</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S1-Reporting-SGBD-Excel-VBA" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y1 python">
+      <div class="proj-top"><span class="proj-icon">🐍</span><span class="year-pill y1">S1</span></div>
+      <h3>Conversion et traitement de fichiers de données</h3>
+      <p>Script Python extrayant, nettoyant et restructurant des données depuis des fichiers JSON/CSV, avec gestion de l'encodage et des valeurs manquantes.</p>
+      <div class="proj-chips">
+        <span class="chip green">Python</span>
+        <span class="chip">JSON → CSV</span>
+        <span class="chip">ETL</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S1-Manipulation-Fichiers-Python" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y1 r">
+      <div class="proj-top"><span class="proj-icon">📐</span><span class="year-pill y1">S1</span></div>
+      <h3>Statistiques descriptives avec R</h3>
+      <p>Analyse statistique descriptive complète : moyenne, médiane, variance, distributions, histogrammes, boxplots et corrélations sur un jeu de données réel.</p>
+      <div class="proj-chips">
+        <span class="chip pink">R</span>
+        <span class="chip">ggplot2</span>
+        <span class="chip">Statistiques</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S1-Statistiques-Descriptives-R" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y1">
+      <div class="proj-top"><span class="proj-icon">🔍</span><span class="year-pill y1">S1</span></div>
+      <h3>Enquête de terrain — Analyse économique</h3>
+      <p>Conception du questionnaire, collecte terrain, saisie et analyse statistique des réponses, puis restitution sous forme de rapport économique argumenté.</p>
+      <div class="proj-chips">
+        <span class="chip">Enquête</span>
+        <span class="chip orange">Excel</span>
+        <span class="chip pink">R</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S1-Enquete-Terrain-Economie" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y1 sql">
+      <div class="proj-top"><span class="proj-icon">🗃️</span><span class="year-pill y1">S1</span></div>
+      <h3>Requêtes SQL — De la base aux jointures complexes</h3>
+      <p>Série de requêtes progressives sur une BDR relationnelle : SELECT, jointures, agrégations, sous-requêtes et création de schéma (DDL).</p>
+      <div class="proj-chips">
+        <span class="chip blue">SQL</span>
+        <span class="chip blue">MySQL</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S1-SQL-Requetes" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y1">
+      <div class="proj-top"><span class="proj-icon">📉</span><span class="year-pill y1">S1</span></div>
+      <h3>Indicateurs de performance d'activité — SAS & R</h3>
+      <p>Calcul de KPI à partir de données d'entreprise avec SAS (DATA step, PROC MEANS) et R. Tableaux de bord statistiques et analyse de l'activité commerciale.</p>
+      <div class="proj-chips">
+        <span class="chip">SAS</span>
+        <span class="chip pink">R</span>
+        <span class="chip">KPIs</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S1-IBA-SAS-R" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y1 sql python">
+      <div class="proj-top"><span class="proj-icon">🗄️</span><span class="year-pill y1">S2</span></div>
+      <h3>Base de données relationnelle — Merise & Python</h3>
+      <p>Modélisation Merise (EA → MLD), implémentation SQL, puis alimentation automatique de la base avec un script Python. Interface de consultation des données.</p>
+      <div class="proj-chips">
+        <span class="chip blue">MySQL</span>
+        <span class="chip green">Python</span>
+        <span class="chip">BDR</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S2-Conception-BDR-Python-SQL" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y1 r">
+      <div class="proj-top"><span class="proj-icon">🏠</span><span class="year-pill y1">S2</span></div>
+      <h3>Régression linéaire — Marché immobilier des Deux-Sèvres</h3>
+      <p>Modèle de régression linéaire en R pour estimer le prix des biens immobiliers. Validation (R², Fisher, résidus), prédictions avec intervalles de confiance 95%.</p>
+      <div class="proj-chips">
+        <span class="chip pink">R</span>
+        <span class="chip">Régression</span>
+        <span class="chip">ggplot2</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S2-Regression-Statistique-R" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y1 powerbi r">
+      <div class="proj-top"><span class="proj-icon">🏆</span><span class="year-pill y1">S2</span></div>
+      <h3>DataViz — Power BI & R (ggplot2)</h3>
+      <p>Tableau de bord interactif Power BI avec mesures DAX + visualisations statistiques avancées avec ggplot2 en R sur un même jeu de données.</p>
+      <div class="proj-chips">
+        <span class="chip blue">Power BI</span>
+        <span class="chip pink">R</span>
+        <span class="chip">DAX</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S2-DataViz-PowerBI-R" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y1 r">
+      <div class="proj-top"><span class="proj-icon">🔬</span><span class="year-pill y1">S2</span></div>
+      <h3>Statistique inférentielle — Tests d'hypothèses</h3>
+      <p>Tests t de Student, ANOVA, Chi², intervalles de confiance en R. Tirer des conclusions statistiques sur des populations à partir d'échantillons.</p>
+      <div class="proj-chips">
+        <span class="chip pink">R</span>
+        <span class="chip">ANOVA</span>
+        <span class="chip">Tests stat.</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S2-IBA-Statistique-Inferentielle-R" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y1 python">
+      <div class="proj-top"><span class="proj-icon">🐍</span><span class="year-pill y1">S2</span></div>
+      <h3>Programmation Python avancée — pandas & POO</h3>
+      <p>Fonctions, classes (POO), gestion d'erreurs et analyse de données sur un dataset Airbnb avec pandas et NumPy. Architecture modulaire et bonnes pratiques.</p>
+      <div class="proj-chips">
+        <span class="chip green">Python</span>
+        <span class="chip green">pandas</span>
+        <span class="chip">POO</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S2-Programmation-Python" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y1">
+      <div class="proj-top"><span class="proj-icon">📊</span><span class="year-pill y1">S2</span></div>
+      <h3>SAS — Manipulation et analyse statistique</h3>
+      <p>DATA step avancé (fusion, transposition), procédures statistiques (PROC MEANS, FREQ, CORR) et visualisations SGPLOT dans SAS Studio.</p>
+      <div class="proj-chips">
+        <span class="chip">SAS Base</span>
+        <span class="chip">SAS Studio</span>
+        <span class="chip">PROC</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S2-SAS" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+  </div>
+
+  <!-- ══════ 2ÈME ANNÉE ══════ -->
+  <div class="year-header reveal" data-section="y2" style="margin-top:20px;">
+    <h2>2ème année — Semestre 3 (VCOD)</h2>
+    <span class="year-count">10 projets</span>
+  </div>
+
+  <div class="projects-grid" id="grid-y2">
+
+    <div class="proj-card reveal" data-tags="y2 etl sql">
+      <div class="proj-top"><span class="proj-icon">🏭</span><span class="year-pill y2">S3 VCOD</span></div>
+      <h3>Data Warehouse & ETL avec Talend</h3>
+      <p>Conception d'un entrepôt de données en schéma étoile. Jobs ETL Talend Open Studio pour extraire, transformer et charger des données depuis sources hétérogènes.</p>
+      <div class="proj-chips">
+        <span class="chip">Talend</span>
+        <span class="chip blue">SQL</span>
+        <span class="chip">Data Warehouse</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S3-DataWarehouse-Talend-ETL" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y2 python web">
+      <div class="proj-top"><span class="proj-icon">🕷️</span><span class="year-pill y2">S3 VCOD</span></div>
+      <h3>Web Scraping & APIs REST avec Python</h3>
+      <p>Collecte automatisée de données web avec BeautifulSoup + consommation d'APIs REST. Données stockées et analysées avec pandas.</p>
+      <div class="proj-chips">
+        <span class="chip green">Python</span>
+        <span class="chip">BeautifulSoup</span>
+        <span class="chip">API REST</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S3-WebScraping-API-Python" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y2 r excel">
+      <div class="proj-top"><span class="proj-icon">📈</span><span class="year-pill y2">S3 VCOD</span></div>
+      <h3>Séries temporelles — Prévisions</h3>
+      <p>Décomposition de séries temporelles (tendance, saisonnalité) sur données Air France et inflation. Prévisions à 6 mois avec intervalles de confiance.</p>
+      <div class="proj-chips">
+        <span class="chip pink">R</span>
+        <span class="chip orange">Excel</span>
+        <span class="chip">Prévisions</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S3-Series-Temporelles" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y2 sql">
+      <div class="proj-top"><span class="proj-icon">🏗️</span><span class="year-pill y2">S3 VCOD</span></div>
+      <h3>Modélisation du Système d'Information Décisionnel</h3>
+      <p>Conception d'un entrepôt de données sous Oracle SQL. Schéma en étoile, tables de faits et de dimensions, requêtes analytiques avancées.</p>
+      <div class="proj-chips">
+        <span class="chip blue">Oracle SQL</span>
+        <span class="chip">Décisionnel</span>
+        <span class="chip">Data Mart</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S3-Modelisation-SID" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y2 web sql">
+      <div class="proj-top"><span class="proj-icon">🏛️</span><span class="year-pill y2">S3 VCOD</span></div>
+      <h3>Application Web PHP — Musées de France</h3>
+      <p>Application dynamique PHP/MySQL sur les musées français. Recherche full-text, filtres par région, sessions et formulaires sécurisés (PDO).</p>
+      <div class="proj-chips">
+        <span class="chip">PHP 8</span>
+        <span class="chip blue">MySQL</span>
+        <span class="chip">MVC</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S3-Application-Web-PHP-Musees" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y2 web">
+      <div class="proj-top"><span class="proj-icon">🗺️</span><span class="year-pill y2">S3 VCOD</span></div>
+      <h3>DataViz interactive — D3.js & Villes de France</h3>
+      <p>Carte choroplèthe interactive des villes françaises en D3.js. Graphiques dynamiques liés à la carte, tooltips et filtres temps réel dans le navigateur.</p>
+      <div class="proj-chips">
+        <span class="chip">D3.js</span>
+        <span class="chip">JavaScript</span>
+        <span class="chip">GeoJSON</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/SAE-S3-Dataviz-D3js-Villes" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y2 python etl sql">
+      <div class="proj-top"><span class="proj-icon">⚙️</span><span class="year-pill y2">S3 VCOD</span></div>
+      <h3>Pipeline ETL — Python & Docker</h3>
+      <p>Pipeline ETL complet conteneurisé : extraction CSV, transformation pandas, chargement PostgreSQL. Orchestration multi-conteneurs avec Docker Compose.</p>
+      <div class="proj-chips">
+        <span class="chip green">Python</span>
+        <span class="chip">Docker</span>
+        <span class="chip blue">PostgreSQL</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/Projet-ETL-Pipeline-Python-Docker" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y2 python sql etl">
+      <div class="proj-top"><span class="proj-icon">🎮</span><span class="year-pill y2">2ème année</span></div>
+      <h3>GameTracker — Pipeline jeux vidéo</h3>
+      <p>Nettoyage de données brutes de joueurs (Players.csv, Scores.csv), chargement dans MySQL et génération automatique de rapports de performance.</p>
+      <div class="proj-chips">
+        <span class="chip green">Python</span>
+        <span class="chip blue">MySQL</span>
+        <span class="chip">ETL</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/Projet-GameTracker-Python-SQL" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y2 powerbi sql">
+      <div class="proj-top"><span class="proj-icon">📊</span><span class="year-pill y2">2ème année</span></div>
+      <h3>Lias-BI — Tableau de bord décisionnel Power BI</h3>
+      <p>Système décisionnel complet pour Lias-BI : modélisation en étoile, mesures DAX et dashboard interactif Power BI avec KPIs de pilotage d'activité.</p>
+      <div class="proj-chips">
+        <span class="chip blue">Power BI</span>
+        <span class="chip blue">SQL</span>
+        <span class="chip">DAX</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/Projet-LiasBi-PowerBI-SQL" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+    <div class="proj-card reveal" data-tags="y2 python r">
+      <div class="proj-top"><span class="proj-icon">🤖</span><span class="year-pill y2">S3 VCOD</span></div>
+      <h3>Machine Learning — Régression logistique & clustering</h3>
+      <p>Modèles prédictifs avec scikit-learn (régression logistique, K-Means). Analyse exploratoire, feature engineering et évaluation (ROC, AUC, matrice de confusion).</p>
+      <div class="proj-chips">
+        <span class="chip green">Python</span>
+        <span class="chip green">scikit-learn</span>
+        <span class="chip">ML</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+  </div>
+
+  <!-- ══════ STAGE ══════ -->
+  <div class="year-header reveal" data-section="stage" style="margin-top:20px;">
+    <h2>Stage à l'étranger — BUT 2</h2>
+    <span class="year-count">1 projet</span>
+  </div>
+
+  <div class="projects-grid" id="grid-stage">
+
+    <div class="proj-card reveal" data-tags="stage python r">
+      <div class="proj-top"><span class="proj-icon">🇷🇴</span><span class="year-pill stage">Stage Roumanie</span></div>
+      <h3>Anonymisation & Régression logistique — UAIC Iași</h3>
+      <p>Stage de recherche à l'Université Alexandru Ioan Cuza (Roumanie). Anonymisation de données médicales (k-anonymat, RGPD) et modèle prédictif par régression logistique (AUC > 0.85).</p>
+      <div class="proj-chips">
+        <span class="chip green">Python</span>
+        <span class="chip pink">R</span>
+        <span class="chip green">scikit-learn</span>
+        <span class="chip">RGPD</span>
+      </div>
+      <a href="https://github.com/alexanravonneaux/Stage-Roumanie-Regression-Logistique" target="_blank" class="proj-gh">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+        Voir sur GitHub →
+      </a>
+    </div>
+
+  </div>
+
+  <div class="bottom-spacer"></div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <h2>Intéressé par mon profil ?</h2>
+    <p class="footer-sub">N'hésitez pas à me contacter pour toute opportunité de stage ou d'alternance.</p>
+    <div class="contact-grid">
+      <a href="tel:0670763545" class="contact-item">📞 06 70 76 35 45</a>
+      <a href="mailto:alexan.ravonneaux@gmail.com" class="contact-item">✉️ alexan.ravonneaux@gmail.com</a>
+      <a href="https://www.linkedin.com/in/alexan-ravonneaux-302b5a312/" target="_blank" class="contact-item">🔗 LinkedIn</a>
+      <a href="https://github.com/alexanravonneaux" target="_blank" class="contact-item">🐙 GitHub</a>
+      <a href="docs/Alexan Ravonneaux.pdf" class="contact-item" download>📄 Mon CV</a>
+    </div>
+    <nav class="footer-nav">
+      <a href="portfolio.html">Accueil</a>
+      <a href="projets.html">Mes projets</a>
+      <a href="apropos.html">À propos</a>
+    </nav>
+    <p class="footer-copy">© 2026 Alexan Ravonneaux</p>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    function filter(tag, btn) {
+      document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cards = document.querySelectorAll('.proj-card');
+      cards.forEach(c => {
+        const tags = c.dataset.tags || '';
+        const show = (tag === 'all') || tags.includes(tag);
+        c.style.display = show ? 'flex' : 'none';
+        if (show) { c.style.animation = 'none'; void c.offsetHeight; c.style.animation = ''; }
+      });
+      ['y1','y2','stage'].forEach(yr => {
+        const hdr = document.querySelector(`.year-header[data-section="${yr}"]`);
+        const grid = document.getElementById(`grid-${yr}`);
+        if (!hdr || !grid) return;
+        const hasVisible = [...grid.querySelectorAll('.proj-card')].some(c => c.style.display !== 'none');
+        hdr.style.display = hasVisible ? 'flex' : 'none';
+      });
+    }
+  </script>
+
+</body>
+</html>

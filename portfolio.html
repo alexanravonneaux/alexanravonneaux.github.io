@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Accueil — Alexan Ravonneaux</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Alexan Ravonneaux — étudiant en BUT Science des Données à l'IUT de Niort. Python, R, SQL, Power BI.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+  <style>
+
+    body { padding-top: 52px; }
+
+    /* ════════════════════════════════
+       HERO — Section 1 (blanc)
+    ════════════════════════════════ */
+    .hero-section {
+      background: var(--white);
+      padding: 100px 40px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: var(--gray-mid);
+    }
+
+    .hero-section .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-section .tagline {
+      font-size: 0.82em;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+
+    .hero-section h1 {
+      font-size: clamp(2.6em, 6.5vw, 5.2em);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+
+    .hero-section .hero-desc {
+      font-size: clamp(1em, 1.8vw, 1.2em);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ════════════════════════════════
+       PHOTO + INTRO — Section 2 (gris)
+    ════════════════════════════════ */
+    .intro-section {
+      background: var(--gray-light);
+    }
+
+    .intro-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 100px 40px;
+      display: flex;
+      gap: 72px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .intro-photo-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .intro-photo {
+      width: 300px;
+      height: 360px;
+      object-fit: cover;
+      border-radius: var(--radius-xl);
+      display: block;
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Badge flottant */
+    .photo-badge {
+      position: absolute;
+      bottom: -14px;
+      right: -14px;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8em;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    .photo-badge .badge-icon { font-size: 1.3em; }
+
+    .intro-text { flex: 1; min-width: 260px; }
+
+    .intro-text h2 {
+      font-size: clamp(1.8em, 3.5vw, 2.8em);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+
+    .intro-text p {
+      font-size: 1.05em;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+
+    /* ════════════════════════════════
+       COMPÉTENCES — Section 3 (blanc)
+    ════════════════════════════════ */
+    .skills-section {
+      background: var(--white);
+    }
+
+    .skills-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 100px 40px;
+    }
+
+    .skills-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .skills-header h2 {
+      font-size: clamp(2em, 4vw, 3.2em);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .skills-header p {
+      color: var(--text-secondary);
+      font-size: 1.05em;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--gray-mid);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+
+    .skill-tile {
+      background: var(--white);
+      padding: 40px 32px;
+      transition: var(--transition);
+      cursor: default;
+    }
+
+    .skill-tile:hover {
+      background: var(--gray-light);
+    }
+
+    .skill-tile .skill-emoji {
+      font-size: 2.4em;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .skill-tile h3 {
+      font-size: 1.05em;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .skill-tile p {
+      font-size: 0.82em;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .skill-tile .skill-level {
+      margin-top: 16px;
+      height: 3px;
+      background: var(--gray-mid);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .skill-tile .skill-level-fill {
+      height: 100%;
+      background: var(--blue);
+      border-radius: 2px;
+      transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ════════════════════════════════
+       CTA FINAL — Section 4 (gris)
+    ════════════════════════════════ */
+    .cta-section {
+      background: var(--gray-light);
+    }
+
+    .cta-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 100px 40px;
+      text-align: center;
+    }
+
+    .cta-inner h2 {
+      font-size: clamp(2em, 4vw, 3em);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .cta-inner p {
+      color: var(--text-secondary);
+      font-size: 1.05em;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+      .intro-inner { flex-direction: column; gap: 48px; padding: 70px 24px; }
+      .intro-photo { width: 100%; max-width: 300px; height: 300px; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-section { padding: 80px 24px 60px; }
+      .skills-inner, .cta-inner { padding: 70px 24px; }
+    }
+
+    @media (max-width: 500px) {
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="navbar-brand">Alexan Ravonneaux</a>
+    <div class="navbar-links">
+      <a href="portfolio.html" class="active">Accueil</a>
+      <a href="projets.html">Projets</a>
+      <a href="apropos.html">À propos</a>
+    </div>
+  </nav>
+
+  <!-- ── SECTION 1 : HERO ── -->
+  <section class="hero-section">
+    <div class="hero-inner">
+      <div class="tagline reveal">Étudiant en Science des Données</div>
+      <h1 class="reveal reveal-delay-1">
+        Analyser, modéliser,<br>communiquer la donnée.
+      </h1>
+      <p class="hero-desc reveal reveal-delay-2">
+        Je suis Alexan Ravonneaux, étudiant en 2ᵉ année de BUT Science des Données à l'IUT de Niort.
+        Je transforme des données brutes en insights clairs et actionnables à l'aide de Python, R, SQL et Power BI.
+      </p>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="projets.html" class="btn-apple">
+          Voir mes projets
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="docs/Alexan Ravonneaux.pdf" class="btn-apple-ghost" download>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Mon CV
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── SECTION 2 : INTRO / PHOTO ── -->
+  <section class="intro-section">
+    <div class="intro-inner">
+      <div class="intro-photo-wrap reveal">
+        <img src="img/moichemise.jpeg" alt="Alexan Ravonneaux" class="intro-photo">
+        <div class="photo-badge">
+          <span class="badge-icon">📍</span>
+          Niort, France
+        </div>
+      </div>
+      <div class="intro-text reveal reveal-delay-1">
+        <div class="label">Mon objectif</div>
+        <h2>Extraire la valeur cachée dans les données</h2>
+        <p>
+          En BUT Science des Données, j'apprends à maîtriser l'intégralité du cycle de la donnée : 
+          de sa collecte et son nettoyage jusqu'à sa modélisation statistique et sa présentation visuelle. 
+          Mon ambition est de contribuer à la prise de décision grâce à des analyses rigoureuses et des visualisations impactantes.
+        </p>
+        <p>
+          Curieux, rigoureux et adaptable, je cherche à mettre mes compétences au service de projets 
+          concrets en stage ou en alternance à partir de 2026.
+        </p>
+        <a href="apropos.html" class="btn-apple-ghost" style="margin-top: 4px;">
+          En savoir plus sur mon parcours →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── SECTION 3 : COMPÉTENCES ── -->
+  <section class="skills-section">
+    <div class="skills-inner">
+      <div class="skills-header reveal">
+        <div class="label">Compétences techniques</div>
+        <h2>Les outils que je maîtrise</h2>
+        <p>Un ensemble de technologies complémentaires couvrant tout le pipeline de la donnée.</p>
+      </div>
+      <div class="skills-grid reveal reveal-delay-1">
+
+        <div class="skill-tile">
+          <span class="skill-emoji">🐍</span>
+          <h3>Python</h3>
+          <p>Nettoyage de données, automatisation, interfaces graphiques (Tkinter), scripts d'analyse.</p>
+          <div class="skill-level"><div class="skill-level-fill" style="width:78%"></div></div>
+        </div>
+
+        <div class="skill-tile">
+          <span class="skill-emoji">📊</span>
+          <h3>R & RStudio</h3>
+          <p>Statistiques descriptives et inférentielles, régression, clustering, R Shiny.</p>
+          <div class="skill-level"><div class="skill-level-fill" style="width:72%"></div></div>
+        </div>
+
+        <div class="skill-tile">
+          <span class="skill-emoji">🗄️</span>
+          <h3>SQL / MySQL</h3>
+          <p>Conception de bases relationnelles, requêtes complexes, jointures, sous-requêtes.</p>
+          <div class="skill-level"><div class="skill-level-fill" style="width:65%"></div></div>
+        </div>
+
+        <div class="skill-tile">
+          <span class="skill-emoji">📈</span>
+          <h3>Power BI</h3>
+          <p>Tableaux de bord interactifs, DAX, datavisualisation avancée, reporting métier.</p>
+          <div class="skill-level"><div class="skill-level-fill" style="width:70%"></div></div>
+        </div>
+
+        <div class="skill-tile">
+          <span class="skill-emoji">📉</span>
+          <h3>Excel & VBA</h3>
+          <p>Reporting automatisé, macros, tableaux croisés dynamiques, mise en forme conditionnelle.</p>
+          <div class="skill-level"><div class="skill-level-fill" style="width:75%"></div></div>
+        </div>
+
+        <div class="skill-tile">
+          <span class="skill-emoji">🤖</span>
+          <h3>Machine Learning</h3>
+          <p>Arbres de décision, régression logistique, clustering, évaluation et validation de modèles.</p>
+          <div class="skill-level"><div class="skill-level-fill" style="width:55%"></div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── SECTION 4 : CTA ── -->
+  <section class="cta-section">
+    <div class="cta-inner reveal">
+      <div class="label">Disponible</div>
+      <h2>Travaillons ensemble</h2>
+      <p>
+        Ouvert aux opportunités de stage, d'alternance et aux projets collaboratifs en lien avec la Data Science, l'analyse de données ou la Business Intelligence.
+      </p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="mailto:alexan.ravonneaux@gmail.com" class="btn-apple">Me contacter</a>
+        <a href="https://www.linkedin.com/in/alexan-ravonneaux-302b5a312/" class="btn-apple-ghost" target="_blank">LinkedIn →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <h2>Alexan Ravonneaux</h2>
+    <p class="footer-sub">Étudiant en BUT Science des Données · IUT de Niort · Université de Poitiers</p>
+    <div class="contact-grid">
+      <a href="tel:0670763545" class="contact-item">📞 06 70 76 35 45</a>
+      <a href="mailto:alexan.ravonneaux@gmail.com" class="contact-item">✉️ alexan.ravonneaux@gmail.com</a>
+      <a href="https://www.linkedin.com/in/alexan-ravonneaux-302b5a312/" target="_blank" class="contact-item">🔗 LinkedIn</a>
+      <a href="docs/Alexan Ravonneaux.pdf" class="contact-item" download>📄 Mon CV</a>
+    </div>
+    <nav class="footer-nav">
+      <a href="portfolio.html">Accueil</a>
+      <a href="projets.html">Mes projets</a>
+      <a href="apropos.html">À propos</a>
+    </nav>
+    <p class="footer-copy">© 2026 Alexan Ravonneaux</p>
+  </footer>
+
+  <script>
+    // ── Navbar scroll effect ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // ── Reveal on scroll ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
